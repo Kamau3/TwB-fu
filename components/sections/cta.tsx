@@ -1,58 +1,79 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { MessageCircle, ArrowRight } from "lucide-react"
-import { WHATSAPP_URL } from "@/lib/constants"
+import { MessageCircle, Phone, ArrowRight } from "lucide-react"
+import { WHATSAPP_URL, PHONE_NUMBER } from "@/lib/constants"
 import Link from "next/link"
 
 export function CTA() {
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="relative rounded-2xl bg-gradient-to-br from-gold/10 via-card to-purple/10 border border-border p-8 md:p-12 overflow-hidden">
-          {/* Background decorations */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple/5 rounded-full blur-3xl" />
-          
-          <div className="relative z-10 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-              Ready to Explore How AI Can{" "}
-              <span className="text-gold">Help Your Business</span>?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 text-pretty">
-              Let&apos;s have a conversation about your goals. No pressure, no jargon—just a 
-              straightforward discussion about what&apos;s possible for your team.
-            </p>
-            
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
-                size="lg" 
-                className="bg-gold hover:bg-gold-light text-primary-foreground font-semibold px-8 py-6 text-lg shadow-lg shadow-gold/20"
-                asChild
-              >
-                <a 
-                  href={WHATSAPP_URL("Hi! I'd like to learn more about AI solutions for my business.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Chat on WhatsApp
-                </a>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-border text-foreground hover:bg-secondary font-semibold px-8 py-6 text-lg"
-                asChild
-              >
-                <Link href="/contact">
-                  Contact Us
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+    <section className="relative py-24 px-4 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-background to-purple/10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--background)_70%)]" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl" />
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold mb-8">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
+          </span>
+          <span className="text-sm font-medium">{"Let's Talk"}</span>
+        </div>
+
+        {/* Headline */}
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+          Ready to Make Your{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">
+            Business AI-Ready?
+          </span>
+        </h2>
+
+        {/* Description */}
+        <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+          {"Whether you're looking to train your team, automate processes, or just explore what AI can do for you—we're here to help. No pressure, just a conversation."}
+        </p>
+
+        {/* CTA buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <Button 
+            size="lg"
+            className="h-14 px-8 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-primary-foreground font-semibold text-lg shadow-xl shadow-gold/25"
+            asChild
+          >
+            <a 
+              href={WHATSAPP_URL("Hi! I'd like to discuss AI solutions for my business.")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Chat on WhatsApp
+            </a>
+          </Button>
+          <Button 
+            size="lg"
+            variant="outline"
+            className="h-14 px-8 border-border font-semibold text-lg"
+            asChild
+          >
+            <a href={`tel:${PHONE_NUMBER}`}>
+              <Phone className="mr-2 h-5 w-5" />
+              Call Us
+            </a>
+          </Button>
+        </div>
+
+        {/* Secondary link */}
+        <div className="flex items-center justify-center gap-2 text-muted-foreground">
+          <span>Or</span>
+          <Link href="/contact" className="text-gold hover:text-gold-light font-medium inline-flex items-center gap-1">
+            send us a message
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

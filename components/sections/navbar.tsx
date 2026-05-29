@@ -1,12 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, MessageCircle } from "lucide-react"
+import { Menu, MessageCircle, User, LogOut } from "lucide-react"
 import { LOGOS, WHATSAPP_URL } from "@/lib/constants"
+import { createClient } from "@/lib/supabase/client"
+import type { User as SupabaseUser } from "@supabase/supabase-js"
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -18,6 +20,23 @@ const navLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [user, setUser] = useState<SupabaseUser | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const supabase = createClient()
+    
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+      setLoading(false)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
   
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -47,10 +66,42 @@ export function Navbar() {
             ))}
           </div>
           
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          {/* Desktop CTA / Auth */}
+          <div className="hidden md:flex items-center gap-3">
+            {!loading && (
+              <>
+                {user ? (
+                  <>
+                    <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
+                      <Link href="/dashboard">
+                        <User className="h-4 w-4 mr-2" />
+                        Dashboard
+                      </Link>
+                    </Button>
+                    <form action="/auth/signout" method="post">
+                      <Button variant="ghost" type="submit" className="text-muted-foreground hover:text-foreground">
+                        <LogOut className="h-4 w-4" />
+                      </Button>
+                    </form>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
+                      <Link href="/auth/login">Sign In</Link>
+                    </Button>
+                    <Button 
+                      className="bg-gold hover:bg-gold-light text-primary-foreground font-medium"
+                      asChild
+                    >
+                      <Link href="/auth/sign-up">Get Started</Link>
+                    </Button>
+                  </>
+                )}
+              </>
+            )}
             <Button 
-              className="bg-gold hover:bg-gold-light text-primary-foreground font-medium"
+              variant="outline"
+              className="border-gold text-gold hover:bg-gold hover:text-primary-foreground"
               asChild
             >
               <a 
@@ -59,7 +110,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
-                Let&apos;s Talk
+                WhatsApp
               </a>
             </Button>
           </div>
@@ -84,8 +135,56 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+                
+                <div className="border-t border-border pt-6 space-y-4">
+                  {!loading && (
+                    <>
+                      {user ? (
+                        <>
+                          <Link 
+                            href="/dashboard"
+                            onClick={() => setIsOpen(false)}
+                            className="flex items-center gap-2 text-foreground hover:text-gold"
+                          >
+                            <User className="h-5 w-5" />
+                            Dashboard
+                          </Link>
+                          <form action="/auth/signout" method="post">
+                            <button
+                              type="submit"
+                              className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                            >
+                              <LogOut className="h-5 w-5" />
+                              Sign Out
+                            </button>
+                          </form>
+                        </>
+                      ) : (
+                        <>
+                          <Link 
+                            href="/auth/login"
+                            onClick={() => setIsOpen(false)}
+                            className="text-lg text-foreground hover:text-gold"
+                          >
+                            Sign In
+                          </Link>
+                          <Button 
+                            className="w-full bg-gold hover:bg-gold-light text-primary-foreground font-medium"
+                            asChild
+                          >
+                            <Link href="/auth/sign-up" onClick={() => setIsOpen(false)}>
+                              Get Started
+                            </Link>
+                          </Button>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+
                 <Button 
-                  className="bg-gold hover:bg-gold-light text-primary-foreground font-medium mt-4"
+                  variant="outline"
+                  className="border-gold text-gold hover:bg-gold hover:text-primary-foreground mt-4"
                   asChild
                 >
                   <a 
@@ -94,7 +193,7 @@ export function Navbar() {
                     rel="noopener noreferrer"
                   >
                     <MessageCircle className="mr-2 h-4 w-4" />
-                    Let&apos;s Talk
+                    WhatsApp Us
                   </a>
                 </Button>
               </div>
