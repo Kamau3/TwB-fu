@@ -1,44 +1,49 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, MessageCircle } from "lucide-react"
+import { LOGOS, WHATSAPP_URL } from "@/lib/constants"
 
 const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/academy", label: "Academy" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const whatsappNumber = "254700000000"
-  const whatsappMessage = encodeURIComponent("Hi! I'm interested in AI training.")
   
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-gold to-purple flex items-center justify-center text-primary-foreground font-bold text-sm">
-              TB
-            </div>
-            <span className="font-semibold text-foreground hidden sm:block">Tech with Brands AI</span>
-          </a>
+          <Link href="/" className="flex items-center">
+            <Image 
+              src={LOGOS.horizontal} 
+              alt="Tech with Brands" 
+              width={180} 
+              height={40}
+              className="h-10 w-auto"
+            />
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a 
+              <Link 
                 key={link.href}
                 href={link.href}
                 className="text-sm text-muted-foreground hover:text-gold transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
           
@@ -49,12 +54,12 @@ export function Navbar() {
               asChild
             >
               <a 
-                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                href={WHATSAPP_URL("Hi! I'm interested in AI training.")}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
-                Book Training
+                Let&apos;s Talk
               </a>
             </Button>
           </div>
@@ -70,26 +75,26 @@ export function Navbar() {
             <SheetContent side="right" className="bg-background border-border w-[280px]">
               <div className="flex flex-col gap-6 mt-8">
                 {navLinks.map((link) => (
-                  <a 
+                  <Link 
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className="text-lg text-foreground hover:text-gold transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <Button 
                   className="bg-gold hover:bg-gold-light text-primary-foreground font-medium mt-4"
                   asChild
                 >
                   <a 
-                    href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                    href={WHATSAPP_URL("Hi! I'm interested in AI training.")}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <MessageCircle className="mr-2 h-4 w-4" />
-                    Book Training
+                    Let&apos;s Talk
                   </a>
                 </Button>
               </div>

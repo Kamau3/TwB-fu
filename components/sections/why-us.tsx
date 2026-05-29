@@ -1,45 +1,45 @@
 "use client"
 
-import { TrendingUp, Users, Target, Wallet } from "lucide-react"
+import { Target, Users, Lightbulb, HeartHandshake } from "lucide-react"
 
 const reasons = [
   {
     icon: Target,
-    title: "Results-Focused Training",
+    title: "Results-Focused Approach",
     description: "We don't teach theory—we teach practical skills your team can use immediately. Every session includes hands-on exercises with real business scenarios."
   },
   {
     icon: Users,
-    title: "Local Support & Understanding",
-    description: "We understand Kenyan businesses. From M-Pesa integrations to local market challenges, our training is built for how you actually work."
+    title: "Built for Kenyan Businesses",
+    description: "We understand local market challenges, payment systems, and business culture. Our training is designed for how Kenyan organizations actually work."
   },
   {
-    icon: TrendingUp,
-    title: "Measurable Business Outcomes",
-    description: "Track your ROI. Our clients report 40% productivity gains, 3x faster customer response times, and significant cost savings within 90 days."
+    icon: Lightbulb,
+    title: "Practical, Not Overwhelming",
+    description: "No complex jargon or intimidating tech speak. We break down AI into simple, actionable steps that anyone on your team can follow."
   },
   {
-    icon: Wallet,
-    title: "Affordable & Transparent",
-    description: "No surprises. Clear KES pricing, flexible payment plans, and packages designed for every budget—from startups to enterprises."
+    icon: HeartHandshake,
+    title: "Partnership, Not Just Training",
+    description: "We walk with you beyond the workshop. Ongoing support, follow-up sessions, and real help when you need it—we're invested in your success."
   }
 ]
 
 export function WhyUs() {
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 bg-gradient-to-b from-transparent via-card/50 to-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold mb-4">
-            <span className="text-sm font-medium">Why Tech with Brands AI</span>
+            <span className="text-sm font-medium">Why Choose Us</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Built for{" "}
-            <span className="text-gold">Kenyan Businesses</span>
+            Your Success is{" "}
+            <span className="text-gold">Our Priority</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            We&apos;ve trained 500+ professionals and helped 50+ organizations adopt AI. Here&apos;s why they chose us.
+            We&apos;re not just another AI company. We&apos;re your execution partner—focused on helping you achieve real, measurable outcomes.
           </p>
         </div>
         

@@ -1,61 +1,53 @@
 "use client"
 
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { GraduationCap, Users, ClipboardCheck, Cog, ArrowRight, MessageCircle } from "lucide-react"
+import { GraduationCap, Users, ClipboardCheck, Cog, ArrowRight } from "lucide-react"
 
 const services = [
   {
     icon: GraduationCap,
     title: "Corporate AI Training",
-    description: "Hands-on training for your team to use AI tools effectively. From ChatGPT to custom workflows—your staff will be productive from day one.",
-    benefits: ["Increase team productivity by 40%", "Reduce manual work hours", "Upskill entire departments"],
-    price: "From KES 45,000",
-    cta: "Book Team Training"
+    description: "Equip your team with AI skills they can use from day one. Hands-on sessions tailored to your industry and workflow.",
+    href: "/services#training"
   },
   {
     icon: Users,
     title: "Team Workshops",
-    description: "Intensive half-day or full-day workshops tailored to your industry. Marketing, finance, HR, customer service—we cover it all.",
-    benefits: ["Industry-specific AI applications", "Hands-on exercises", "Immediate implementation"],
-    price: "From KES 75,000",
-    cta: "Schedule Workshop"
+    description: "Intensive workshops that transform how your departments work. Marketing, finance, HR, operations—we cover it all.",
+    href: "/services#workshops"
   },
   {
     icon: ClipboardCheck,
     title: "AI Readiness Audits",
-    description: "Comprehensive assessment of your business processes to identify where AI can save you time and money. Get a clear roadmap.",
-    benefits: ["Identify automation opportunities", "ROI projections", "Implementation roadmap"],
-    price: "From KES 35,000",
-    cta: "Request Audit"
+    description: "Understand where AI can make the biggest impact in your business. Get a clear roadmap with actionable recommendations.",
+    href: "/services#audits"
   },
   {
     icon: Cog,
     title: "Automation Implementation",
-    description: "We build and deploy AI systems that run your repetitive tasks. Customer responses, data entry, report generation—automated.",
-    benefits: ["Save 20+ hours weekly", "Reduce errors by 90%", "Scale without hiring"],
-    price: "From KES 150,000",
-    cta: "Get Started"
+    description: "We build and deploy AI systems that handle your repetitive tasks. Customer responses, data entry, reporting—automated.",
+    href: "/services#automation"
   }
 ]
 
 export function Services() {
-  const whatsappNumber = "254700000000"
-  
   return (
-    <section id="services" className="py-20 px-4">
+    <section className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple/10 border border-purple/20 text-purple-light mb-4">
-            <span className="text-sm font-medium">Our Services</span>
+            <span className="text-sm font-medium">What We Do</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Everything You Need to{" "}
-            <span className="text-gold">Adopt AI</span>
+            Transform How Your Team{" "}
+            <span className="text-gold">Works with AI</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            From training your team to automating your operations, we provide end-to-end AI solutions for Kenyan businesses.
+            From upskilling your workforce to automating operations, we provide practical AI solutions 
+            that deliver measurable business outcomes.
           </p>
         </div>
         
@@ -71,7 +63,6 @@ export function Services() {
                   <div className="p-3 rounded-lg bg-gold/10 text-gold group-hover:bg-gold/20 transition-colors">
                     <service.icon className="h-6 w-6" />
                   </div>
-                  <div className="text-sm font-semibold text-gold">{service.price}</div>
                 </div>
                 <CardTitle className="text-xl text-foreground">{service.title}</CardTitle>
                 <CardDescription className="text-muted-foreground">
@@ -79,31 +70,33 @@ export function Services() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-2 mb-6">
-                  {service.benefits.map((benefit, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className="h-1.5 w-1.5 rounded-full bg-gold" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
                 <Button 
-                  className="w-full bg-secondary hover:bg-gold/20 text-foreground border border-border hover:border-gold/50"
+                  variant="ghost" 
+                  className="text-gold hover:text-gold-light hover:bg-gold/10 p-0 h-auto font-medium"
                   asChild
                 >
-                  <a 
-                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hi! I'm interested in: ${service.title}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    {service.cta}
+                  <Link href={service.href}>
+                    Learn more
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        {/* CTA */}
+        <div className="mt-12 text-center">
+          <Button 
+            size="lg"
+            className="bg-gold hover:bg-gold-light text-primary-foreground"
+            asChild
+          >
+            <Link href="/services">
+              View All Services
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
