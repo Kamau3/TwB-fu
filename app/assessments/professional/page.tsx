@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Lock, Sparkles, Download, Share2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { WHATSAPP_URL, AI_GENOME_DIMENSIONS } from '@/lib/constants'
+import { createClient } from '@/lib/supabase/client'
 
 // Enhanced corporate-grade assessment questions - 40 questions across 8 dimensions
 const PROFESSIONAL_QUESTIONS = [
@@ -609,7 +610,7 @@ export default function ProfessionalAssessmentPage() {
   }
 
   const handleDownloadResults = async () => {
-    const { createClient } = await import('@/lib/supabase/client')
+    // Check if user is authenticated
     const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     
@@ -618,6 +619,11 @@ export default function ProfessionalAssessmentPage() {
       return
     }
 
+    // Authenticated - proceed to results
+    downloadResults()
+  }
+
+  const downloadResults = () => {
     router.push('/assessment-results')
   }
 
@@ -627,6 +633,16 @@ export default function ProfessionalAssessmentPage() {
       return sum + (optionIndex + 1) * 25
     }, 0)
     return Math.round(totalScore / Object.keys(answers).length)
+  }
+
+  const calculateDimensionScore = (dimension: string) => {
+    const dimensionQuestions = PROFESSIONAL_QUESTIONS.filter((q) => q.dimension === dimension)
+    if (dimensionQuestions.length === 0) return 0
+    const total = dimensionQuestions.reduce((sum, q) => {
+      const answerIndex = answers[q.id]
+      return answerIndex !== undefined ? sum + (answerIndex + 1) * 25 : sum
+    }, 0)
+    return Math.round(total / dimensionQuestions.length)
   }
 
   const currentQ = PROFESSIONAL_QUESTIONS[currentQuestion]
