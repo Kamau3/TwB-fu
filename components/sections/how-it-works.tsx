@@ -1,5 +1,3 @@
-"use client"
-
 import { MessageCircle, Calendar, Rocket, TrendingUp } from "lucide-react"
 
 const steps = [

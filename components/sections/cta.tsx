@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone, ArrowRight } from "lucide-react"
 import { WHATSAPP_URL, PHONE_NUMBER } from "@/lib/constants"

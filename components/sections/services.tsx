@@ -1,6 +1,3 @@
-"use client"
-
-import { useRef } from "react"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -46,10 +43,8 @@ const services = [
 ]
 
 export function Services() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
   return (
-    <section ref={sectionRef} className="relative py-24 px-4 overflow-hidden">
+    <section className="relative py-24 px-4 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />

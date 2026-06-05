@@ -1,15 +1,14 @@
 'use client'
 
-export const dynamic = 'force-dynamic'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { AIGenomeRadar } from '@/components/ai-genome-radar'
 import { WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, Download, Share2, Lock, Sparkles, FileText, Award, Zap, TrendingUp } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { generateCertificateHTML } from '@/app/actions/generate-certificate'
+
+export const dynamic = 'force-dynamic'
 
 interface Insights {
   summary?: string

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Loader2, User } from "lucide-react"
+import { DashboardHeader } from "@/components/sections/dashboard-header"
 
 interface Profile {
   id: string
@@ -19,6 +20,7 @@ interface Profile {
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [userEmail, setUserEmail] = useState("")
   const [fullName, setFullName] = useState("")
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -34,6 +36,8 @@ export default function ProfilePage() {
         router.push("/auth/login")
         return
       }
+
+      setUserEmail(user.email ?? "")
 
       const { data } = await supabase
         .from("profiles")
@@ -93,23 +97,14 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50">
-        <div className="container mx-auto px-4 py-4 flex items-center gap-4">
+      <DashboardHeader
+        title="Profile Settings"
+        left={
           <Link href="/dashboard" className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-5 w-5" />
           </Link>
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-minimal_9e6fa51e-UaMf38Ojdi15BYKPAH4926MB2FocKR.png"
-              alt="Tech with Brands"
-              width={40}
-              height={40}
-            />
-            <span className="font-semibold text-foreground">Profile Settings</span>
-          </Link>
-        </div>
-      </header>
+        }
+      />
 
       <main className="container mx-auto px-4 py-8 max-w-2xl">
         <div className="bg-card border border-border rounded-xl p-8">
@@ -165,7 +160,7 @@ export default function ProfilePage() {
             <div className="space-y-2">
               <Label>Email</Label>
               <div className="px-3 py-2 bg-background border border-border rounded-md text-muted-foreground">
-                {profile?.id ? "Loading..." : "Not available"}
+                {userEmail || "Not available"}
               </div>
               <p className="text-xs text-muted-foreground">
                 Email cannot be changed here

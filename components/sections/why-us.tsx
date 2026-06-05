@@ -1,5 +1,3 @@
-"use client"
-
 import { Target, Users2, Lightbulb, HeartHandshake } from "lucide-react"
 
 const reasons = [

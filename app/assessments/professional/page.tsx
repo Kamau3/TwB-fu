@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-
-export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Lock, Sparkles, Download, Share2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { WHATSAPP_URL, AI_GENOME_DIMENSIONS } from '@/lib/constants'
+import { WHATSAPP_URL } from '@/lib/constants'
 import { createClient } from '@/lib/supabase/client'
+
+export const dynamic = 'force-dynamic'
 
 // Enhanced corporate-grade assessment questions - 40 questions across 8 dimensions
 const PROFESSIONAL_QUESTIONS = [

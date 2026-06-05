@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
+import { PageHero } from "@/components/sections/page-hero"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone, Mail, MapPin, Clock } from "lucide-react"
@@ -43,22 +44,12 @@ export default function ContactPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold mb-6">
-            <span className="text-sm font-medium">Contact Us</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Let&apos;s{" "}
-            <span className="text-gold">Talk</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Have questions about our services? Want to discuss AI training for your team? 
-            We&apos;re here to help.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Contact Us"
+        title="Let&apos;s"
+        highlight="Talk"
+        description="Have questions about our services? Want to discuss AI training for your team? We&apos;re here to help."
+      />
       
       {/* Contact Methods */}
       <section className="py-12 px-4">

@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import { INDUSTRIES, WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, BookOpen, Zap } from 'lucide-react'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { PageHero } from '@/components/sections/page-hero'
+import { CTASection } from '@/components/sections/cta-section'
 
 export const metadata: Metadata = {
   title: 'Industry AI Playbooks | TwB',
@@ -10,19 +14,11 @@ export const metadata: Metadata = {
 export default function PlaybooksPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-purple/5" />
-        
-        <div className="relative max-w-4xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Industry AI Playbooks
-          </h1>
-          <p className="text-xl text-foreground/70 mb-8">
-            Proven implementation strategies, workflows, and templates tailored to your industry.
-          </p>
-        </div>
-      </section>
+      <Navbar />
+      <PageHero
+        title="Industry AI Playbooks"
+        description="Proven implementation strategies, workflows, and templates tailored to your industry."
+      />
 
       {/* Playbooks Grid */}
       <section className="py-20 px-4">
@@ -90,9 +86,10 @@ export default function PlaybooksPage() {
           </div>
 
           {/* Premium Playbooks */}
-          <div className="bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 mb-16">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Need a Custom Playbook?</h2>
-            <p className="text-foreground/70 mb-8">Our experts can create industry and organization-specific playbooks with your strategic goals and AI roadmap.</p>
+          <CTASection
+            heading="Need a Custom Playbook?"
+            description="Our experts can create industry and organization-specific playbooks with your strategic goals and AI roadmap."
+          >
             <a
               href={WHATSAPP_URL('Hi TwB! I want a custom AI playbook for my industry.')}
               target="_blank"
@@ -102,9 +99,10 @@ export default function PlaybooksPage() {
               Request Custom Playbook
               <ChevronRight className="w-5 h-5" />
             </a>
-          </div>
+          </CTASection>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

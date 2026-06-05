@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
+import { PageHero } from "@/components/sections/page-hero"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { GraduationCap, Video, Users, Award, BookOpen, Zap, MessageCircle, ArrowRight } from "lucide-react"
@@ -67,37 +68,27 @@ export default function AcademyPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple/10 border border-purple/20 text-purple-light mb-6">
-            <GraduationCap className="h-4 w-4" />
-            <span className="text-sm font-medium">AI Academy</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Master AI Skills That{" "}
-            <span className="text-gold">Move Your Career Forward</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 text-pretty">
-            Join our AI Academy and learn practical skills you can apply immediately. 
-            Live workshops, on-demand content, community support, and certifications—all in one place.
-          </p>
-          <Button 
-            size="lg"
-            className="bg-gold hover:bg-gold-light text-primary-foreground shadow-lg shadow-gold/20"
-            asChild
+      <PageHero
+        label="AI Academy"
+        title="Master AI Skills That"
+        highlight="Move Your Career Forward"
+        description="Join our AI Academy and learn practical skills you can apply immediately. Live workshops, on-demand content, community support, and certifications—all in one place."
+      >
+        <Button 
+          size="lg"
+          className="bg-gold hover:bg-gold-light text-primary-foreground shadow-lg shadow-gold/20"
+          asChild
+        >
+          <a 
+            href={WHATSAPP_URL("Hi! I'm interested in joining the AI Academy.")}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <a 
-              href={WHATSAPP_URL("Hi! I'm interested in joining the AI Academy.")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Join the Academy
-            </a>
-          </Button>
-        </div>
-      </section>
+            <MessageCircle className="mr-2 h-5 w-5" />
+            Join the Academy
+          </a>
+        </Button>
+      </PageHero>
       
       {/* Features */}
       <section className="py-16 px-4 bg-gradient-to-b from-transparent via-card/50 to-transparent">

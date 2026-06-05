@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { BookOpen, Play, FileText, Award, ArrowRight } from "lucide-react"

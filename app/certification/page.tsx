@@ -1,7 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { CERTIFICATION_LEVELS, WHATSAPP_URL } from '@/lib/constants'
-import { ChevronRight, CheckCircle, Award, TrendingUp } from 'lucide-react'
+import { ChevronRight, CheckCircle, Award } from 'lucide-react'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { PageHero } from '@/components/sections/page-hero'
+import { CTASection } from '@/components/sections/cta-section'
 
 export const metadata: Metadata = {
   title: 'AI Excellence Certification | TwB',
@@ -11,19 +15,11 @@ export const metadata: Metadata = {
 export default function CertificationPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-purple/5" />
-        
-        <div className="relative max-w-4xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            AI Excellence Certification
-          </h1>
-          <p className="text-xl text-foreground/70 mb-8">
-            Achieve industry-recognized certification. Demonstrate your organization&apos;s AI maturity to stakeholders, partners, and markets.
-          </p>
-        </div>
-      </section>
+      <Navbar />
+      <PageHero
+        title="AI Excellence Certification"
+        description="Achieve industry-recognized certification. Demonstrate your organization&apos;s AI maturity to stakeholders, partners, and markets."
+      />
 
       {/* Certification Levels */}
       <section className="py-20 px-4">
@@ -152,29 +148,29 @@ export default function CertificationPage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Ready to Get Certified?</h2>
-            <p className="text-foreground/70 mb-8">Start with our free assessment and begin your certification journey today.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/assessments"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
-              >
-                Take Assessment
-                <ChevronRight className="w-5 h-5" />
-              </Link>
-              <a
-                href={WHATSAPP_URL('Hi TwB! I want to discuss AI certification for my organization.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
-              >
-                Talk to Expert
-              </a>
-            </div>
-          </div>
+          <CTASection
+            heading="Ready to Get Certified?"
+            description="Start with our free assessment and begin your certification journey today."
+          >
+            <Link
+              href="/assessments"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
+            >
+              Take Assessment
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+            <a
+              href={WHATSAPP_URL('Hi TwB! I want to discuss AI certification for my organization.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
+            >
+              Talk to Expert
+            </a>
+          </CTASection>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

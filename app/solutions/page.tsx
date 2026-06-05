@@ -1,71 +1,57 @@
 import { Metadata } from 'next'
 import { SOLUTIONS_CATEGORIES, WHATSAPP_URL } from '@/lib/constants'
-import { ChevronRight, Star, Award } from 'lucide-react'
+import { ChevronRight, Award, Star } from 'lucide-react'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { PageHero } from '@/components/sections/page-hero'
+import { CTASection } from '@/components/sections/cta-section'
 
 export const metadata: Metadata = {
-  title: 'Solutions Registry | TwB',
-  description: 'Curated registry of AI solutions and tools aligned with TwB certification standards.',
+  title: 'AI Solutions | TwB',
+  description: 'Enterprise AI solutions: Multi-Agent Systems, Governance, AI Genome, and analytics for African businesses.',
 }
 
 const SAMPLE_SOLUTIONS = [
   {
-    id: 1,
-    name: 'Enterprise AI Platform Pro',
-    vendor: 'TechCorp AI',
-    category: 'Enterprise AI Platforms',
-    description: 'Comprehensive AI platform for enterprise operations',
+    id: "multi-agent",
+    name: "Multi-Agent System",
+    vendor: "TwB Enterprise",
+    category: "Agent Systems",
+    description: "Deploy coordinated AI agents that handle complex workflows across your organization.",
+    tags: ["automation", "workflow", "enterprise"],
+    certified: true,
     rating: 4.8,
-    certified: true,
-    tags: ['Automation', 'Analytics', 'Governance'],
   },
   {
-    id: 2,
-    name: 'DataFlow Intelligence',
-    vendor: 'DataSystems Inc',
-    category: 'Data & Analytics',
-    description: 'Advanced data management and analytics solution',
+    id: "ai-governance",
+    name: "AI Governance Framework",
+    vendor: "TwB Enterprise",
+    category: "Governance",
+    description: "Establish policies and guardrails for responsible AI deployment in your organization.",
+    tags: ["compliance", "ethics", "security"],
+    certified: true,
     rating: 4.6,
-    certified: true,
-    tags: ['Data Quality', 'Analytics', 'Governance'],
   },
   {
-    id: 3,
-    name: 'AutomateFlow RPA',
-    vendor: 'Process Labs',
-    category: 'Automation & RPA',
-    description: 'Robotic Process Automation for business workflows',
+    id: "genome-analytics",
+    name: "AI Genome Analytics",
+    vendor: "TwB Enterprise",
+    category: "Analytics",
+    description: "Measure and visualize your organization's AI maturity across 8 key dimensions.",
+    tags: ["analytics", "benchmarking", "insights"],
+    certified: false,
     rating: 4.7,
-    certified: true,
-    tags: ['Automation', 'Efficiency', 'ROI'],
-  },
-  {
-    id: 4,
-    name: 'ComplianceGuard AI',
-    vendor: 'GovTech Solutions',
-    category: 'Governance & Compliance',
-    description: 'AI-powered governance and compliance management',
-    rating: 4.5,
-    certified: true,
-    tags: ['Governance', 'Risk', 'Compliance'],
   },
 ]
 
 export default function SolutionsPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-purple/5" />
-        
-        <div className="relative max-w-4xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Solutions Registry
-          </h1>
-          <p className="text-xl text-foreground/70 mb-8">
-            Curated and certified AI solutions aligned with TwB standards. Find the right tools for your organization.
-          </p>
-        </div>
-      </section>
+      <Navbar />
+      <PageHero
+        title="AI Solutions"
+        description="Enterprise-ready AI solutions designed for the unique challenges of African businesses."
+      />
 
       {/* Category Filter */}
       <section className="py-12 px-4 border-b border-border">
@@ -151,9 +137,10 @@ export default function SolutionsPage() {
           </div>
 
           {/* Submit Solution CTA */}
-          <div className="bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Have a Solution to Showcase?</h2>
-            <p className="text-foreground/70 mb-8">Submit your AI solution for TwB certification and reach our global community.</p>
+          <CTASection
+            heading="Have a Solution to Showcase?"
+            description="Submit your AI solution for TwB certification and reach our global community."
+          >
             <a
               href={WHATSAPP_URL('Hi TwB! I want to submit my AI solution to your registry.')}
               target="_blank"
@@ -163,9 +150,10 @@ export default function SolutionsPage() {
               Submit Your Solution
               <ChevronRight className="w-5 h-5" />
             </a>
-          </div>
+          </CTASection>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

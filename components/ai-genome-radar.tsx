@@ -11,7 +11,6 @@ interface GenomeScore {
 interface AIGenomeRadarProps {
   scores: GenomeScore[]
   title?: string
-  interactive?: boolean
 }
 
 export function AIGenomeRadar({ 
@@ -26,7 +25,6 @@ export function AIGenomeRadar({
     { dimension: 'Risk', score: 35, category: 'Safety' },
   ],
   title = 'Your AI Genome',
-  interactive = true
 }: AIGenomeRadarProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 

@@ -2,6 +2,10 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ASSESSMENT_TYPES, WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, Clock, CheckCircle, Brain } from 'lucide-react'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { PageHero } from '@/components/sections/page-hero'
+import { CTASection } from '@/components/sections/cta-section'
 
 export const metadata: Metadata = {
   title: 'AI Readiness Assessments | TwB',
@@ -11,19 +15,11 @@ export const metadata: Metadata = {
 export default function AssessmentsPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-purple/5" />
-        
-        <div className="relative max-w-4xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            AI Readiness Assessments
-          </h1>
-          <p className="text-xl text-foreground/70 mb-8">
-            Understand where your organization stands on the AI maturity journey. Get clear insights across 8 critical dimensions.
-          </p>
-        </div>
-      </section>
+      <Navbar />
+      <PageHero
+        title="AI Readiness Assessments"
+        description="Understand where your organization stands on the AI maturity journey. Get clear insights across 8 critical dimensions."
+      />
 
       {/* Assessment Options */}
       <section className="py-20 px-4">
@@ -100,21 +96,23 @@ export default function AssessmentsPage() {
           </div>
 
           {/* CTA */}
-          <div className="group bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center hover:border-gold/50 hover:shadow-lg hover:shadow-gold/20 transition-all duration-300">
-            <h2 className="text-2xl font-bold text-foreground mb-4 group-hover:text-gold transition-colors duration-300">Questions about assessments?</h2>
-            <p className="text-foreground/70 mb-8 group-hover:text-foreground/90 transition-colors duration-300">Our team is ready to help you choose the right assessment for your organization.</p>
+          <CTASection
+            heading="Questions about assessments?"
+            description="Our team is ready to help you choose the right assessment for your organization."
+          >
             <a
               href={WHATSAPP_URL('Hi TwB! I want to learn more about your AI assessments.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/50 hover:scale-105 duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
             >
               <span>Contact Us on WhatsApp</span>
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="w-5 h-5" />
             </a>
-          </div>
+          </CTASection>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

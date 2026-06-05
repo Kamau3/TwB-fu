@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import Image from "next/image"
 import { createClient } from "@/lib/supabase/server"
 import { Button } from "@/components/ui/button"
 import { 
@@ -13,6 +12,7 @@ import {
   LogOut
 } from "lucide-react"
 import { WHATSAPP_URL } from "@/lib/constants"
+import { DashboardHeader } from "@/components/sections/dashboard-header"
 
 async function getProfile(userId: string) {
   const supabase = await createClient()
@@ -55,19 +55,10 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Dashboard Header */}
-      <header className="border-b border-border bg-card/50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-minimal_9e6fa51e-UaMf38Ojdi15BYKPAH4926MB2FocKR.png"
-              alt="Tech with Brands"
-              width={40}
-              height={40}
-            />
-            <span className="font-semibold text-foreground">Dashboard</span>
-          </Link>
-          <div className="flex items-center gap-4">
+      <DashboardHeader
+        title="Dashboard"
+        right={
+          <>
             <Link href="/dashboard/profile" className="text-muted-foreground hover:text-foreground">
               <Settings className="h-5 w-5" />
             </Link>
@@ -76,9 +67,9 @@ export default async function DashboardPage() {
                 <LogOut className="h-5 w-5" />
               </button>
             </form>
-          </div>
-        </div>
-      </header>
+          </>
+        }
+      />
 
       <main className="container mx-auto px-4 py-8">
         {/* Welcome Section */}

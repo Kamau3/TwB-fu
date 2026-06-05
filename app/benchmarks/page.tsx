@@ -1,28 +1,24 @@
 import { Metadata } from 'next'
 import { INDUSTRIES, WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, TrendingUp, BarChart3 } from 'lucide-react'
+import { Navbar } from '@/components/sections/navbar'
+import { Footer } from '@/components/sections/footer'
+import { PageHero } from '@/components/sections/page-hero'
+import { CTASection } from '@/components/sections/cta-section'
 
 export const metadata: Metadata = {
-  title: 'AI Benchmarks & Reports | TwB',
-  description: 'Industry benchmarks, trends, and analysis of AI adoption across organizations globally.',
+  title: 'AI Industry Benchmarks | TwB',
+  description: 'Compare your AI maturity against industry benchmarks. Data-driven insights for strategic decision-making.',
 }
 
 export default function BenchmarksPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-purple/5" />
-        
-        <div className="relative max-w-4xl mx-auto text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            AI Benchmarks & Insights
-          </h1>
-          <p className="text-xl text-foreground/70 mb-8">
-            Compare your AI maturity against industry leaders. Access global trends and actionable insights.
-          </p>
-        </div>
-      </section>
+      <Navbar />
+      <PageHero
+        title="AI Industry Benchmarks"
+        description="Data-driven benchmarks to compare your AI maturity against industry standards and competitors."
+      />
 
       {/* Industry Benchmarks */}
       <section className="py-20 px-4">
@@ -156,26 +152,26 @@ export default function BenchmarksPage() {
           </div>
 
           {/* Download Reports */}
-          <div className="bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Download Detailed Reports</h2>
-            <p className="text-foreground/70 mb-8">Get comprehensive benchmark data and strategic insights for your industry.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all">
-                Download Global Report
-                <ChevronRight className="w-5 h-5" />
-              </button>
-              <a
-                href={WHATSAPP_URL('Hi TwB! I want the regional AI benchmark report for my industry.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
-              >
-                Request Industry Report
-              </a>
-            </div>
-          </div>
+          <CTASection
+            heading="Download Detailed Reports"
+            description="Get comprehensive benchmark data and strategic insights for your industry."
+          >
+            <button className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all">
+              Download Global Report
+              <ChevronRight className="w-5 h-5" />
+            </button>
+            <a
+              href={WHATSAPP_URL('Hi TwB! I want the regional AI benchmark report for my industry.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
+            >
+              Request Industry Report
+            </a>
+          </CTASection>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
