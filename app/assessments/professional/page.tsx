@@ -624,7 +624,18 @@ export default function ProfessionalAssessmentPage() {
   }
 
   const downloadResults = () => {
-    router.push('/assessment-results')
+    const score = calculateScore()
+    const dims = JSON.stringify([
+      { dimension: 'Capability', score: calculateDimensionScore('Capability'), category: 'Infrastructure' },
+      { dimension: 'Governance', score: calculateDimensionScore('Governance'), category: 'Risk Management' },
+      { dimension: 'Workforce', score: calculateDimensionScore('Workforce'), category: 'Skills' },
+      { dimension: 'Data', score: calculateDimensionScore('Data'), category: 'Foundation' },
+      { dimension: 'Automation', score: calculateDimensionScore('Automation'), category: 'Operations' },
+      { dimension: 'Innovation', score: calculateDimensionScore('Innovation'), category: 'Growth' },
+      { dimension: 'ROI', score: calculateDimensionScore('ROI'), category: 'Value' },
+      { dimension: 'Risk', score: calculateDimensionScore('Risk'), category: 'Safety' },
+    ])
+    router.push(`/assessment-results?s=${score}&d=${encodeURIComponent(dims)}`)
   }
 
   const calculateScore = () => {

@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { AIGenomeRadar } from '@/components/ai-genome-radar'
 import { WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, Download, Share2, Lock, Sparkles, FileText, Award, Zap, TrendingUp } from 'lucide-react'
@@ -26,7 +27,36 @@ interface User {
   }
 }
 
+const DEFAULT_GENOME_SCORES = [
+  { dimension: 'Capability', score: 72, category: 'Infrastructure' },
+  { dimension: 'Governance', score: 58, category: 'Risk Management' },
+  { dimension: 'Workforce', score: 65, category: 'Skills' },
+  { dimension: 'Data', score: 78, category: 'Foundation' },
+  { dimension: 'Automation', score: 68, category: 'Operations' },
+  { dimension: 'Innovation', score: 62, category: 'Growth' },
+  { dimension: 'ROI', score: 55, category: 'Value' },
+  { dimension: 'Risk', score: 48, category: 'Safety' },
+]
+
 export default function AssessmentResultsPage() {
+  const searchParams = useSearchParams()
+  const fromUrlScore = searchParams.get('s')
+  const fromUrlDims = searchParams.get('d')
+
+  const genomeScores = useMemo(() => {
+    if (fromUrlDims) {
+      try {
+        const parsed = JSON.parse(fromUrlDims) as { dimension: string; score: number; category: string }[]
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      } catch {}
+    }
+    return DEFAULT_GENOME_SCORES
+  }, [fromUrlDims])
+
+  const overallScore = fromUrlScore
+    ? Math.min(100, Math.max(0, parseInt(fromUrlScore)))
+    : Math.round(genomeScores.reduce((sum, d) => sum + d.score, 0) / genomeScores.length)
+
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [showCertificate, setShowCertificate] = useState(false)
@@ -129,7 +159,7 @@ export default function AssessmentResultsPage() {
     )
   }
 
-  if (!user) {
+  if (!user && !fromUrlScore) {
     return (
       <main className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="max-w-md w-full">
@@ -175,20 +205,6 @@ export default function AssessmentResultsPage() {
       </main>
     )
   }
-
-  // Sample genome data - in real app would come from assessment responses
-  const genomeScores = [
-    { dimension: 'Capability', score: 72, category: 'Infrastructure' },
-    { dimension: 'Governance', score: 58, category: 'Risk Management' },
-    { dimension: 'Workforce', score: 65, category: 'Skills' },
-    { dimension: 'Data', score: 78, category: 'Foundation' },
-    { dimension: 'Automation', score: 68, category: 'Operations' },
-    { dimension: 'Innovation', score: 62, category: 'Growth' },
-    { dimension: 'ROI', score: 55, category: 'Value' },
-    { dimension: 'Risk', score: 48, category: 'Safety' },
-  ]
-
-  const overallScore = Math.round(genomeScores.reduce((sum, d) => sum + d.score, 0) / genomeScores.length)
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-background via-background to-card/10 py-12">

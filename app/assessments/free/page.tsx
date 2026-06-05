@@ -104,7 +104,16 @@ export default function FreeAssessmentPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/assessment-results"
+                href={`/assessment-results?s=${percentage}&d=${encodeURIComponent(JSON.stringify([
+                  { dimension: 'Capability', score: Math.min(100, percentage + 10), category: 'Infrastructure' },
+                  { dimension: 'Governance', score: Math.max(0, percentage - 5), category: 'Risk Management' },
+                  { dimension: 'Workforce', score: Math.min(100, percentage + 5), category: 'Skills' },
+                  { dimension: 'Data', score: Math.min(100, percentage + 15), category: 'Foundation' },
+                  { dimension: 'Automation', score: Math.min(100, percentage), category: 'Operations' },
+                  { dimension: 'Innovation', score: Math.max(0, percentage - 10), category: 'Growth' },
+                  { dimension: 'ROI', score: Math.max(0, percentage - 8), category: 'Value' },
+                  { dimension: 'Risk', score: Math.max(0, percentage - 15), category: 'Safety' },
+                ]))}`}
                 className="px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all flex items-center justify-center gap-2"
               >
                 View Full Profile
