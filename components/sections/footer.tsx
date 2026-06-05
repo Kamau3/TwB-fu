@@ -51,7 +51,12 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/services" className="hover:text-gold transition-colors">Services</Link></li>
               <li><Link href="/academy" className="hover:text-gold transition-colors">AI Academy</Link></li>
+              <li><Link href="/assessments" className="hover:text-gold transition-colors">Assessments</Link></li>
+              <li><Link href="/certification" className="hover:text-gold transition-colors">Certification</Link></li>
               <li><Link href="/pricing" className="hover:text-gold transition-colors">Pricing</Link></li>
+              <li><Link href="/solutions" className="hover:text-gold transition-colors">Solutions</Link></li>
+              <li><Link href="/playbooks" className="hover:text-gold transition-colors">Playbooks</Link></li>
+              <li><Link href="/benchmarks" className="hover:text-gold transition-colors">Benchmarks</Link></li>
               <li><Link href="/about" className="hover:text-gold transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
             </ul>
