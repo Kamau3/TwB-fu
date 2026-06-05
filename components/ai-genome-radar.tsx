@@ -133,7 +133,7 @@ export function AIGenomeRadar({
       const labelY = center.y - r
       ctx.fillText(`${(i * 100) / levels}`, center.x + 5, labelY - 3)
     }
-  }, [scores, axes])
+  }, [scores.length, JSON.stringify(scores)])
 
   const overallScore = Math.round(scores.reduce((acc, s) => acc + s.score, 0) / scores.length)
   const strengths = scores.filter(s => s.score >= 70).map(s => s.dimension)

@@ -51,7 +51,7 @@ export default async function DashboardPage() {
     individual: "Individual",
     business: "Business",
     corporate: "Corporate"
-  }[profile?.subscription_tier || "free"]
+  }[(profile?.subscription_tier as string) || "free"]
 
   return (
     <div className="min-h-screen bg-background">

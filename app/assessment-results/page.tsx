@@ -19,8 +19,16 @@ interface Insights {
   raw?: string
 }
 
+interface User {
+  id: string
+  email?: string
+  user_metadata?: {
+    full_name?: string
+  }
+}
+
 export default function AssessmentResultsPage() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [showCertificate, setShowCertificate] = useState(false)
   const [certificateHTML, setCertificateHTML] = useState('')

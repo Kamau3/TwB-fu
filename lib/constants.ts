@@ -13,6 +13,8 @@ export const CONTACT = {
   location: "Nairobi, Kenya"
 }
 
+export const PHONE_NUMBER = CONTACT.phone
+
 export const WHATSAPP_URL = (message: string) => 
   `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`
 
