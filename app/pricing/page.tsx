@@ -157,58 +157,66 @@ export default function PricingPage() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {academyPlans.map((plan, index) => (
-              <Card 
-                key={index} 
-                className={`bg-card border-border relative ${
-                  plan.popular ? 'border-gold ring-2 ring-gold/20' : ''
-                }`}
-              >
+              <div key={index} className="group relative">
+                {/* Glow effect */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold text-primary-foreground text-sm font-medium">
-                      <Star className="h-3 w-3 fill-current" />
-                      Most Popular
-                    </div>
-                  </div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-gold/40 to-gold/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 )}
-                <CardHeader className="text-center pt-8">
-                  <CardTitle className="text-xl text-foreground">{plan.name}</CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    {plan.description}
-                  </CardDescription>
-                  <div className="pt-4">
-                    <span className="text-4xl font-bold text-foreground">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                        <Check className="h-4 w-4 text-gold shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button 
-                    className={`w-full ${
-                      plan.popular 
-                        ? 'bg-gold hover:bg-gold-light text-primary-foreground' 
-                        : 'bg-secondary hover:bg-secondary/80 text-foreground border border-border'
-                    }`}
-                    asChild
-                  >
-                    <a 
-                      href={WHATSAPP_URL(`Hi! I'm interested in the ${plan.name} Academy plan.`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                
+                <Card 
+                  className={`bg-card border-border relative transform transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-2 group-hover:shadow-xl ${
+                    plan.popular 
+                      ? 'border-gold ring-2 ring-gold/20 group-hover:ring-gold/50 group-hover:shadow-gold/30' 
+                      : 'group-hover:border-gold/50 group-hover:shadow-gold/20'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                      <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold text-primary-foreground text-sm font-medium animate-pulse">
+                        <Star className="h-3 w-3 fill-current" />
+                        Most Popular
+                      </div>
+                    </div>
+                  )}
+                  <CardHeader className="text-center pt-8">
+                    <CardTitle className="text-xl text-foreground group-hover:text-gold transition-colors duration-300">{plan.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                      {plan.description}
+                    </CardDescription>
+                    <div className="pt-4">
+                      <span className="text-4xl font-bold text-foreground group-hover:text-gold transition-colors duration-300">{plan.price}</span>
+                      <span className="text-muted-foreground group-hover:text-foreground/70 transition-colors duration-300">{plan.period}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                          <Check className="h-4 w-4 text-gold shrink-0 group-hover:scale-125 transition-transform duration-300" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button 
+                      className={`w-full transform transition-all duration-300 group-hover:shadow-lg ${
+                        plan.popular 
+                          ? 'bg-gold hover:bg-gold-light text-primary-foreground group-hover:shadow-gold/50' 
+                          : 'bg-secondary hover:bg-secondary/80 text-foreground border border-border group-hover:border-gold group-hover:shadow-gold/20'
+                      }`}
+                      asChild
                     >
-                      <MessageCircle className="mr-2 h-4 w-4" />
-                      {plan.cta}
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
+                      <a 
+                        href={WHATSAPP_URL(`Hi! I'm interested in the ${plan.name} Academy plan.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <MessageCircle className="mr-2 h-4 w-4" />
+                        {plan.cta}
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -227,15 +235,17 @@ export default function PricingPage() {
           
           <div className="space-y-4">
             {servicePricing.map((item, index) => (
-              <Card key={index} className="bg-card border-border">
-                <CardContent className="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div>
-                    <h3 className="font-semibold text-foreground">{item.service}</h3>
-                    <p className="text-sm text-muted-foreground">{item.description}</p>
-                  </div>
-                  <div className="text-lg font-bold text-gold whitespace-nowrap">{item.price}</div>
-                </CardContent>
-              </Card>
+              <div key={index} className="group cursor-pointer">
+                <Card className="bg-card border-border hover:border-gold/50 transition-all duration-300 hover:shadow-lg hover:shadow-gold/10 transform hover:scale-[1.01] hover:-translate-y-0.5">
+                  <CardContent className="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <h3 className="font-semibold text-foreground group-hover:text-gold transition-colors duration-300">{item.service}</h3>
+                      <p className="text-sm text-muted-foreground group-hover:text-foreground/70 transition-colors duration-300">{item.description}</p>
+                    </div>
+                    <div className="text-lg font-bold text-gold whitespace-nowrap group-hover:text-amber-300 transition-colors duration-300 group-hover:scale-110">{item.price}</div>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
           

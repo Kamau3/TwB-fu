@@ -1,200 +1,142 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, MessageCircle, Play, CheckCircle2 } from "lucide-react"
-import { LOGOS, WHATSAPP_URL } from "@/lib/constants"
-
-const transformations = [
-  "Customer Service",
-  "Marketing",
-  "Sales",
-  "Operations",
-  "HR & Recruitment",
-  "Finance"
-]
+import Link from 'next/link'
+import Image from 'next/image'
+import { LOGOS, COMPANY, WHATSAPP_URL, AI_GENOME_DIMENSIONS } from '@/lib/constants'
+import { ChevronRight, Award, TrendingUp, Sparkles, Radar } from 'lucide-react'
 
 export function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true)
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % transformations.length)
-        setIsAnimating(false)
-      }, 200)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(212,175,55,0.15),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_80%_50%,rgba(139,92,246,0.08),transparent)]" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-      </div>
-
-      {/* Floating particles */}
+    <section className="relative min-h-screen bg-background overflow-hidden flex flex-col">
+      {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-gold/30 rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
-            }}
-          />
-        ))}
+        <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-gradient-to-br from-gold/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-gradient-to-br from-purple/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:80px_80px]" />
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div className="text-center lg:text-left">
-            {/* Tagline badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-gradient-to-r from-gold/20 to-purple/20 border border-gold/30 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
-              </span>
-              <span className="text-sm font-medium text-gold">Your AI Execution Partner</span>
-            </div>
-
-            {/* Main headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-[1.1]">
-              Transform Your{" "}
-              <span className="relative inline-block">
-                <span 
-                  className={`text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold transition-all duration-200 ${isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
-                >
-                  {transformations[currentIndex]}
-                </span>
-                <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-gold to-gold-light rounded-full" />
-              </span>
-              <br />
-              with AI
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
-              Practical AI training, team workshops, and automation solutions 
-              that deliver real business results for Kenyan companies.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
-              <Button 
-                size="lg" 
-                className="h-14 px-8 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-primary-foreground font-semibold text-lg shadow-xl shadow-gold/25 transition-all hover:shadow-gold/40 hover:scale-[1.02]"
-                asChild
-              >
-                <a 
-                  href={WHATSAPP_URL("Hi! I'm interested in AI training for my team.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Start on WhatsApp
-                </a>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="h-14 px-8 border-border text-foreground hover:bg-card font-semibold text-lg group"
-                asChild
-              >
-                <Link href="/academy">
-                  <Play className="mr-2 h-5 w-5 text-gold group-hover:scale-110 transition-transform" />
-                  Explore Academy
-                </Link>
-              </Button>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                <span>Kenyan Business Focus</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                <span>Hands-on Training</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                <span>Real Results</span>
-              </div>
-            </div>
+      <div className="relative flex-1 flex flex-col items-center justify-center px-4 py-20 z-10">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-gold/10 border border-gold/30 backdrop-blur-sm">
+          <div className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
           </div>
+          <span className="text-sm font-semibold text-gold">{COMPANY.tagline}</span>
+        </div>
 
-          {/* Right Content - Visual showcase */}
-          <div className="hidden lg:block relative">
-            {/* Main card */}
-            <div className="relative">
-              {/* Glow effects */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-gold/20 via-purple/10 to-gold/20 rounded-3xl blur-3xl opacity-60" />
-              <div className="absolute -inset-px bg-gradient-to-r from-gold/50 via-transparent to-purple/50 rounded-3xl" />
-              
-              {/* Card content */}
-              <div className="relative bg-card/90 backdrop-blur-xl rounded-3xl p-8 border border-border">
-                {/* Logo */}
-                <div className="flex justify-center mb-8">
-                  <Image 
-                    src={LOGOS.standard} 
-                    alt="Tech with Brands" 
-                    width={280} 
-                    height={280}
-                    className="w-64 h-auto"
-                    priority
-                  />
-                </div>
+        {/* Main headline */}
+        <h1 className="text-5xl md:text-7xl font-bold text-foreground text-center mb-6 leading-tight max-w-4xl">
+          Know Your <span className="text-gold">AI Potential</span>
+        </h1>
 
-                {/* Stats preview */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-background/50 rounded-xl p-4 border border-border">
-                    <div className="text-3xl font-bold text-gold mb-1">AI</div>
-                    <div className="text-sm text-muted-foreground">Training Programs</div>
-                  </div>
-                  <div className="bg-background/50 rounded-xl p-4 border border-border">
-                    <div className="text-3xl font-bold text-purple-light mb-1">24/7</div>
-                    <div className="text-sm text-muted-foreground">Support Available</div>
-                  </div>
-                  <div className="bg-background/50 rounded-xl p-4 border border-border">
-                    <div className="text-3xl font-bold text-gold mb-1">KES</div>
-                    <div className="text-sm text-muted-foreground">Local Pricing</div>
-                  </div>
-                  <div className="bg-background/50 rounded-xl p-4 border border-border">
-                    <div className="text-3xl font-bold text-purple-light mb-1">PRO</div>
-                    <div className="text-sm text-muted-foreground">Certified Team</div>
-                  </div>
+        {/* Subheadline */}
+        <p className="text-xl md:text-2xl text-foreground/70 text-center max-w-2xl mb-8 leading-relaxed">
+          <span className="font-semibold text-gold">{COMPANY.mission}</span>
+          <br />
+          Get your organization certified on the global standard for AI excellence.
+        </p>
+
+        {/* Description */}
+        <p className="text-lg text-foreground/60 text-center max-w-2xl mb-12">
+          Assess your AI readiness across 8 critical dimensions. Get a personalized genome profile. Achieve certification. Reach global benchmark excellence.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <Link
+            href="/assessments"
+            className="group px-8 py-4 bg-gradient-to-r from-gold to-amber-500 text-background rounded-lg font-semibold flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-gold/40 transition-all hover:scale-[1.02]"
+          >
+            Take Free Assessment
+            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <a
+            href={WHATSAPP_URL('Hi TwB! I want to discuss AI certification for my organization.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
+          >
+            Schedule Consultation
+          </a>
+        </div>
+
+        {/* AI Genome Preview - 8 dimensions radar */}
+        <div className="w-full max-w-5xl mb-16">
+          <div className="relative group">
+            {/* Glow */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-gold/20 via-purple/20 to-gold/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Card */}
+            <div className="relative bg-card/80 backdrop-blur-xl border border-gold/20 rounded-2xl p-8 md:p-12">
+              <div className="flex items-start justify-between mb-8">
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">AI Genome Assessment</h3>
+                  <p className="text-foreground/60">8 dimensions of AI maturity</p>
                 </div>
+                <Radar className="w-8 h-8 text-gold flex-shrink-0" />
+              </div>
+
+              {/* Dimensions Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {AI_GENOME_DIMENSIONS.slice(0, 8).map((dimension) => (
+                  <div key={dimension.id} className="group/dim cursor-pointer">
+                    <div className="relative overflow-hidden rounded-lg bg-background/50 border border-border p-4 hover:border-gold transition-all hover:bg-background/80 transform hover:scale-105 hover:shadow-lg hover:shadow-gold/20 duration-300">
+                      {/* Glow on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent opacity-0 group-hover/dim:opacity-100 transition-opacity duration-300" />
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <div className="text-2xl font-bold text-gold mb-2 group-hover/dim:scale-110 transition-transform duration-300">
+                          {dimension.name.charAt(0)}
+                        </div>
+                        <h4 className="font-semibold text-foreground text-sm mb-1 group-hover/dim:text-gold transition-colors duration-300">{dimension.name}</h4>
+                        <p className="text-xs text-foreground/50 line-clamp-2 group-hover/dim:text-foreground/70 transition-colors duration-300">{dimension.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Features */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-border/50">
+                {[
+                  { icon: Award, title: '5 Certification Levels', desc: 'Clear pathway from Foundational to Excellence' },
+                  { icon: TrendingUp, title: 'Industry Benchmarks', desc: 'Compare against global and local standards' },
+                  { icon: Sparkles, title: 'Personalized Roadmap', desc: 'Actionable recommendations for your organization' }
+                ].map((feature, idx) => {
+                  const FeatureIcon = feature.icon
+                  return (
+                    <Link key={idx} href="/assessments" className="group/feature">
+                      <div className="text-center cursor-pointer p-4 rounded-lg hover:bg-gold/5 transition-all duration-300 transform hover:scale-105">
+                        <div className="transform transition-all duration-300 group-hover/feature:scale-125 group-hover/feature:-translate-y-1">
+                          <FeatureIcon className="w-6 h-6 text-gold mx-auto mb-3 group-hover/feature:text-amber-300 transition-colors duration-300" />
+                        </div>
+                        <h4 className="font-semibold text-foreground mb-1 group-hover/feature:text-gold transition-colors duration-300">{feature.title}</h4>
+                        <p className="text-sm text-foreground/60 group-hover/feature:text-foreground/80 transition-colors duration-300">{feature.desc}</p>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
-
-            {/* Floating elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-gold/30 to-gold/10 rounded-2xl blur-xl animate-pulse" />
-            <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-purple/30 to-purple/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-xs text-muted-foreground">Scroll to explore</span>
-        <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-1.5 bg-gold rounded-full animate-bounce" />
+        {/* Trust Signals */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm">
+          <div className="flex items-center gap-2 text-foreground/70">
+            <div className="w-2 h-2 bg-gold rounded-full" />
+            <span>Global Standard</span>
+          </div>
+          <div className="flex items-center gap-2 text-foreground/70">
+            <div className="w-2 h-2 bg-gold rounded-full" />
+            <span>Evidence-Based Assessment</span>
+          </div>
+          <div className="flex items-center gap-2 text-foreground/70">
+            <div className="w-2 h-2 bg-gold rounded-full" />
+            <span>Industry Leaders</span>
+          </div>
         </div>
       </div>
     </section>
