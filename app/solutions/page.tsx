@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { SOLUTIONS_CATEGORIES, WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, Star, Award } from 'lucide-react'
 

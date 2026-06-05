@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { LOGOS, COMPANY, WHATSAPP_URL, AI_GENOME_DIMENSIONS } from '@/lib/constants'
 import { ChevronRight, Award, TrendingUp, Sparkles, Radar } from 'lucide-react'
 

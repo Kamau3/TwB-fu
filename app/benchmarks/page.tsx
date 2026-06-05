@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { INDUSTRIES, WHATSAPP_URL } from '@/lib/constants'
 import { ChevronRight, TrendingUp, BarChart3 } from 'lucide-react'
 
