@@ -30,41 +30,43 @@ export default function AssessmentsPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {ASSESSMENT_TYPES.map((assessment) => (
-              <div key={assessment.type} className="relative group">
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-purple/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                
-                {/* Card */}
-                <div className="relative bg-card border border-border rounded-2xl p-8 hover:border-gold/50 transition-all h-full flex flex-col">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">{assessment.name}</h3>
+              <Link key={assessment.type} href={`/assessments/${assessment.type}`}>
+                <div className="relative group cursor-pointer h-full">
+                  {/* Glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-purple/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <div className="space-y-3 mb-8 flex-1">
-                    <div className="flex items-center gap-3 text-foreground/70">
-                      <Clock className="w-5 h-5 text-gold" />
-                      <span>{assessment.duration}</span>
+                  {/* Card */}
+                  <div className="relative bg-card border border-border rounded-2xl p-8 hover:border-gold transition-all h-full flex flex-col transform group-hover:scale-[1.02] group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-gold/20 duration-300">
+                    {/* Top accent */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold/0 via-gold to-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl" />
+                    
+                    <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-gold transition-colors duration-300">{assessment.name}</h3>
+                    
+                    <div className="space-y-3 mb-8 flex-1">
+                      <div className="flex items-center gap-3 text-foreground/70 group-hover:text-foreground/90 transition-colors duration-300">
+                        <Clock className="w-5 h-5 text-gold group-hover:scale-110 transition-transform duration-300" />
+                        <span>{assessment.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-foreground/70 group-hover:text-foreground/90 transition-colors duration-300">
+                        <Brain className="w-5 h-5 text-gold group-hover:scale-110 transition-transform duration-300" />
+                        <span>{assessment.questions} questions</span>
+                      </div>
+                      <div className="text-3xl font-bold text-gold mt-6 group-hover:text-amber-300 transition-colors duration-300">{assessment.price}</div>
                     </div>
-                    <div className="flex items-center gap-3 text-foreground/70">
-                      <Brain className="w-5 h-5 text-gold" />
-                      <span>{assessment.questions} questions</span>
+
+                    <p className="text-sm text-foreground/60 mb-6 group-hover:text-foreground/70 transition-colors duration-300">
+                      {assessment.type === 'free' && 'Perfect for a quick understanding of your AI readiness baseline.'}
+                      {assessment.type === 'professional' && 'Comprehensive assessment with detailed AI Genome profile and recommendations.'}
+                      {assessment.type === 'enterprise' && 'Full organizational assessment with certification pathway and implementation roadmap.'}
+                    </p>
+
+                    <div className="inline-flex items-center justify-center w-full px-6 py-3 bg-gold text-background rounded-lg font-semibold group-hover:bg-gold/90 transition-all gap-2 group-hover:shadow-lg group-hover:shadow-gold/50 group/btn">
+                      <span>Start Assessment</span>
+                      <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                     </div>
-                    <div className="text-3xl font-bold text-gold mt-6">{assessment.price}</div>
                   </div>
-
-                  <p className="text-sm text-foreground/60 mb-6">
-                    {assessment.type === 'free' && 'Perfect for a quick understanding of your AI readiness baseline.'}
-                    {assessment.type === 'professional' && 'Comprehensive assessment with detailed AI Genome profile and recommendations.'}
-                    {assessment.type === 'enterprise' && 'Full organizational assessment with certification pathway and implementation roadmap.'}
-                  </p>
-
-                  <Link
-                    href={`/assessments/${assessment.type}`}
-                    className="inline-flex items-center justify-center w-full px-6 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all gap-2 group/btn"
-                  >
-                    Start Assessment
-                    <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -86,11 +88,11 @@ export default function AssessmentsPage() {
                 { name: 'ROI', desc: 'Financial impact and value realization' },
                 { name: 'Risk', desc: 'Security, liability, and mitigation' },
               ].map((dim) => (
-                <div key={dim.name} className="flex gap-4 p-4 rounded-lg bg-background/50 border border-border/50">
-                  <CheckCircle className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                <div key={dim.name} className="group cursor-pointer flex gap-4 p-4 rounded-lg bg-background/50 border border-border/50 hover:border-gold/50 hover:bg-background/80 transition-all duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-gold/10">
+                  <CheckCircle className="w-5 h-5 text-gold flex-shrink-0 mt-0.5 group-hover:scale-125 group-hover:text-amber-300 transition-all duration-300" />
                   <div>
-                    <h4 className="font-semibold text-foreground">{dim.name}</h4>
-                    <p className="text-sm text-foreground/60">{dim.desc}</p>
+                    <h4 className="font-semibold text-foreground group-hover:text-gold transition-colors duration-300">{dim.name}</h4>
+                    <p className="text-sm text-foreground/60 group-hover:text-foreground/80 transition-colors duration-300">{dim.desc}</p>
                   </div>
                 </div>
               ))}
@@ -98,17 +100,17 @@ export default function AssessmentsPage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Questions about assessments?</h2>
-            <p className="text-foreground/70 mb-8">Our team is ready to help you choose the right assessment for your organization.</p>
+          <div className="group bg-gradient-to-r from-gold/10 to-purple/10 border border-gold/20 rounded-2xl p-12 text-center hover:border-gold/50 hover:shadow-lg hover:shadow-gold/20 transition-all duration-300">
+            <h2 className="text-2xl font-bold text-foreground mb-4 group-hover:text-gold transition-colors duration-300">Questions about assessments?</h2>
+            <p className="text-foreground/70 mb-8 group-hover:text-foreground/90 transition-colors duration-300">Our team is ready to help you choose the right assessment for your organization.</p>
             <a
               href={WHATSAPP_URL('Hi TwB! I want to learn more about your AI assessments.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/50 hover:scale-105 duration-300"
             >
-              Contact Us on WhatsApp
-              <ChevronRight className="w-5 h-5" />
+              <span>Contact Us on WhatsApp</span>
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>

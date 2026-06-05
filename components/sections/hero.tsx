@@ -81,12 +81,18 @@ export function Hero() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {AI_GENOME_DIMENSIONS.slice(0, 8).map((dimension) => (
                   <div key={dimension.id} className="group/dim cursor-pointer">
-                    <div className="relative overflow-hidden rounded-lg bg-background/50 border border-border p-4 hover:border-gold/50 transition-all hover:bg-background/80">
-                      <div className="text-2xl font-bold text-gold mb-2">
-                        {dimension.name.charAt(0)}
+                    <div className="relative overflow-hidden rounded-lg bg-background/50 border border-border p-4 hover:border-gold transition-all hover:bg-background/80 transform hover:scale-105 hover:shadow-lg hover:shadow-gold/20 duration-300">
+                      {/* Glow on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent opacity-0 group-hover/dim:opacity-100 transition-opacity duration-300" />
+                      
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <div className="text-2xl font-bold text-gold mb-2 group-hover/dim:scale-110 transition-transform duration-300">
+                          {dimension.name.charAt(0)}
+                        </div>
+                        <h4 className="font-semibold text-foreground text-sm mb-1 group-hover/dim:text-gold transition-colors duration-300">{dimension.name}</h4>
+                        <p className="text-xs text-foreground/50 line-clamp-2 group-hover/dim:text-foreground/70 transition-colors duration-300">{dimension.description}</p>
                       </div>
-                      <h4 className="font-semibold text-foreground text-sm mb-1">{dimension.name}</h4>
-                      <p className="text-xs text-foreground/50 line-clamp-2">{dimension.description}</p>
                     </div>
                   </div>
                 ))}
@@ -94,21 +100,24 @@ export function Hero() {
 
               {/* Features */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-border/50">
-                <div className="text-center">
-                  <Award className="w-6 h-6 text-gold mx-auto mb-3" />
-                  <h4 className="font-semibold text-foreground mb-1">5 Certification Levels</h4>
-                  <p className="text-sm text-foreground/60">Clear pathway from Foundational to Excellence</p>
-                </div>
-                <div className="text-center">
-                  <TrendingUp className="w-6 h-6 text-gold mx-auto mb-3" />
-                  <h4 className="font-semibold text-foreground mb-1">Industry Benchmarks</h4>
-                  <p className="text-sm text-foreground/60">Compare against global and local standards</p>
-                </div>
-                <div className="text-center">
-                  <Sparkles className="w-6 h-6 text-gold mx-auto mb-3" />
-                  <h4 className="font-semibold text-foreground mb-1">Personalized Roadmap</h4>
-                  <p className="text-sm text-foreground/60">Actionable recommendations for your organization</p>
-                </div>
+                {[
+                  { icon: Award, title: '5 Certification Levels', desc: 'Clear pathway from Foundational to Excellence' },
+                  { icon: TrendingUp, title: 'Industry Benchmarks', desc: 'Compare against global and local standards' },
+                  { icon: Sparkles, title: 'Personalized Roadmap', desc: 'Actionable recommendations for your organization' }
+                ].map((feature, idx) => {
+                  const FeatureIcon = feature.icon
+                  return (
+                    <Link key={idx} href="/assessments" className="group/feature">
+                      <div className="text-center cursor-pointer p-4 rounded-lg hover:bg-gold/5 transition-all duration-300 transform hover:scale-105">
+                        <div className="transform transition-all duration-300 group-hover/feature:scale-125 group-hover/feature:-translate-y-1">
+                          <FeatureIcon className="w-6 h-6 text-gold mx-auto mb-3 group-hover/feature:text-amber-300 transition-colors duration-300" />
+                        </div>
+                        <h4 className="font-semibold text-foreground mb-1 group-hover/feature:text-gold transition-colors duration-300">{feature.title}</h4>
+                        <p className="text-sm text-foreground/60 group-hover/feature:text-foreground/80 transition-colors duration-300">{feature.desc}</p>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </div>

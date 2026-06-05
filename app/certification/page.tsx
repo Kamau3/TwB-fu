@@ -33,15 +33,15 @@ export default function CertificationPage() {
             
             <div className="space-y-6">
               {CERTIFICATION_LEVELS.map((level, index) => (
-                <div key={level.level} className="group relative">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-gold/10 to-purple/10 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div key={level.level} className="group relative cursor-pointer">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-gold/30 to-purple/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <div className="relative bg-card border border-border rounded-xl p-8 hover:border-gold/50 transition-all">
+                  <div className="relative bg-card border border-border rounded-xl p-8 hover:border-gold transition-all duration-300 transform group-hover:scale-105 group-hover:-translate-y-2 group-hover:shadow-xl group-hover:shadow-gold/20">
                     <div className="grid md:grid-cols-12 gap-8 items-start">
                       {/* Level indicator */}
                       <div className="md:col-span-2">
-                        <div className="inline-flex flex-col items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 border-2 border-gold">
-                          <span className="text-3xl font-bold text-gold">{level.level}</span>
+                        <div className="inline-flex flex-col items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 border-2 border-gold group-hover:border-amber-300 group-hover:from-gold/50 group-hover:to-gold/30 transition-all duration-300 transform group-hover:scale-125">
+                          <span className="text-3xl font-bold text-gold group-hover:text-amber-300 transition-colors duration-300">{level.level}</span>
                         </div>
                       </div>
 
@@ -134,17 +134,17 @@ export default function CertificationPage() {
                 { step: 3, title: 'Evidence', desc: 'Submit implementation evidence' },
                 { step: 4, title: 'Certify', desc: 'Receive your official badge' },
               ].map((item, index) => (
-                <div key={item.step} className="relative">
+                <div key={item.step} className="group cursor-pointer relative">
                   {index < 3 && (
-                    <div className="absolute left-1/2 top-10 w-4 h-0.5 bg-gradient-to-r from-gold to-transparent -translate-x-full" />
+                    <div className="absolute left-1/2 top-10 w-4 h-0.5 bg-gradient-to-r from-gold to-transparent -translate-x-full group-hover:from-gold group-hover:to-gold transition-all duration-300" />
                   )}
                   
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold/20 border-2 border-gold text-gold font-bold mb-4">
+                  <div className="text-center p-4 rounded-lg hover:bg-gold/5 transition-all duration-300 transform group-hover:scale-105">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold/20 border-2 border-gold text-gold font-bold mb-4 group-hover:bg-gold/40 group-hover:border-amber-300 group-hover:text-amber-300 group-hover:scale-125 transition-all duration-300">
                       {item.step}
                     </div>
-                    <h4 className="font-semibold text-foreground mb-2">{item.title}</h4>
-                    <p className="text-sm text-foreground/60">{item.desc}</p>
+                    <h4 className="font-semibold text-foreground mb-2 group-hover:text-gold transition-colors duration-300">{item.title}</h4>
+                    <p className="text-sm text-foreground/60 group-hover:text-foreground/80 transition-colors duration-300">{item.desc}</p>
                   </div>
                 </div>
               ))}

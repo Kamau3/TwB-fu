@@ -40,39 +40,44 @@ export function CTA() {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Button 
-            size="lg"
-            className="h-14 px-8 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-primary-foreground font-semibold text-lg shadow-xl shadow-gold/25"
-            asChild
-          >
-            <a 
-              href={WHATSAPP_URL("Hi! I'd like to discuss AI solutions for my business.")}
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className="group">
+            <Button 
+              size="lg"
+              className="h-14 px-8 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-primary-foreground font-semibold text-lg shadow-xl shadow-gold/25 transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-gold/50"
+              asChild
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Chat on WhatsApp
-            </a>
-          </Button>
-          <Button 
-            size="lg"
-            variant="outline"
-            className="h-14 px-8 border-border font-semibold text-lg"
-            asChild
-          >
-            <a href={`tel:${PHONE_NUMBER}`}>
-              <Phone className="mr-2 h-5 w-5" />
-              Call Us
-            </a>
-          </Button>
+              <a 
+                href={WHATSAPP_URL("Hi! I'd like to discuss AI solutions for my business.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <MessageCircle className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                <span>Chat on WhatsApp</span>
+              </a>
+            </Button>
+          </div>
+          <div className="group">
+            <Button 
+              size="lg"
+              variant="outline"
+              className="h-14 px-8 border-border border-2 font-semibold text-lg hover:border-gold hover:bg-gold/10 transition-all duration-300 transform group-hover:scale-105"
+              asChild
+            >
+              <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-2">
+                <Phone className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                <span>Call Us</span>
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Secondary link */}
-        <div className="flex items-center justify-center gap-2 text-muted-foreground">
+        <div className="flex items-center justify-center gap-2 text-muted-foreground group hover:text-foreground transition-colors duration-300">
           <span>Or</span>
-          <Link href="/contact" className="text-gold hover:text-gold-light font-medium inline-flex items-center gap-1">
-            send us a message
-            <ArrowRight className="h-4 w-4" />
+          <Link href="/contact" className="text-gold hover:text-gold-light font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+            <span>send us a message</span>
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
         </div>
       </div>

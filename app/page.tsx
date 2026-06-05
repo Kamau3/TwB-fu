@@ -62,26 +62,33 @@ function FeaturesSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature) => {
             const Icon = feature.icon
             return (
-              <div key={feature.title} className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-purple/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                
-                <div className="relative bg-card border border-border rounded-2xl p-8 hover:border-gold/50 transition-all h-full flex flex-col">
-                  <Icon className="w-8 h-8 text-gold mb-4" />
-                  <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
-                  <p className="text-foreground/70 flex-1 mb-6">{feature.description}</p>
-                  <Link
-                    href={feature.link}
-                    className="text-gold font-semibold flex items-center gap-2 hover:gap-3 transition-all group/link"
-                  >
-                    {feature.linkText}
-                    <ChevronRight className="w-5 h-5" />
-                  </Link>
+              <Link key={feature.title} href={feature.link}>
+                <div className="group relative cursor-pointer h-full">
+                  {/* Glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-purple/30 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Card */}
+                  <div className="relative bg-card border border-border rounded-2xl p-8 h-full flex flex-col hover:border-gold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gold/20 transform group-hover:scale-[1.02] group-hover:-translate-y-1">
+                    {/* Icon with background */}
+                    <div className="inline-flex w-fit p-3 rounded-xl bg-gold/10 mb-4 group-hover:bg-gold/20 group-hover:text-gold transition-all duration-300">
+                      <Icon className="w-6 h-6 text-gold group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-gold transition-colors duration-300">{feature.title}</h3>
+                    <p className="text-foreground/70 flex-1 mb-6 group-hover:text-foreground/80 transition-colors duration-300">{feature.description}</p>
+                    
+                    {/* Link with arrow animation */}
+                    <div className="text-gold font-semibold flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                      <span>{feature.linkText}</span>
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             )
           })}
         </div>
@@ -91,27 +98,50 @@ function FeaturesSection() {
 }
 
 function GlobalReachSection() {
+  const stats = [
+    { value: '150+', label: 'Organizations assessed and certified', icon: '🏢' },
+    { value: '8', label: 'Dimensions of AI maturity measured', icon: '📊' },
+    { value: '5', label: 'Certification levels to achieve', icon: '🏆' }
+  ]
+
   return (
     <section className="py-20 px-4 bg-card/50 border-y border-border">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-foreground mb-8">Global AI Standards. Local Expertise.</h2>
-        <p className="text-xl text-foreground/70 max-w-3xl mx-auto mb-12">
-          Tech with Brands sets the global benchmark for AI excellence while understanding the unique needs of organizations across industries and regions.
-        </p>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Global AI Standards. Local Expertise.</h2>
+          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
+            Tech with Brands sets the global benchmark for AI excellence while understanding the unique needs of organizations across industries and regions.
+          </p>
+        </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <div className="text-4xl font-bold text-gold mb-3">150+</div>
-            <p className="text-foreground/70">Organizations assessed and certified</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-gold mb-3">8</div>
-            <p className="text-foreground/70">Dimensions of AI maturity measured</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-gold mb-3">5</div>
-            <p className="text-foreground/70">Certification levels to achieve</p>
-          </div>
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="group relative cursor-pointer"
+            >
+              {/* Glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 to-purple/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Card */}
+              <div className="relative bg-background border border-border rounded-2xl p-8 text-center h-full transform transition-all duration-300 group-hover:scale-105 group-hover:border-gold group-hover:shadow-lg group-hover:shadow-gold/10">
+                {/* Icon */}
+                <div className="text-5xl mb-4 transform transition-transform duration-300 group-hover:scale-125">
+                  {stat.icon}
+                </div>
+                
+                {/* Value */}
+                <div className="text-5xl font-bold text-gold mb-3 group-hover:text-amber-300 transition-colors duration-300">
+                  {stat.value}
+                </div>
+                
+                {/* Label */}
+                <p className="text-foreground/70 group-hover:text-foreground transition-colors duration-300">
+                  {stat.label}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
