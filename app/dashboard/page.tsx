@@ -12,7 +12,7 @@ import {
   Settings,
   LogOut
 } from "lucide-react"
-import { WHATSAPP_NUMBER } from "@/lib/constants"
+import { WHATSAPP_URL } from "@/lib/constants"
 
 async function getProfile(userId: string) {
   const supabase = await createClient()
@@ -233,7 +233,7 @@ export default async function DashboardPage() {
                 Our team is here to support your learning journey
               </p>
               <Button asChild variant="outline" className="w-full">
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I need help with my AI Academy account`} target="_blank" rel="noopener noreferrer">
+                <a href={WHATSAPP_URL("Hi, I need help with my AI Academy account")} target="_blank" rel="noopener noreferrer">
                   Chat on WhatsApp
                 </a>
               </Button>
