@@ -12,7 +12,7 @@ import {
   Settings,
   LogOut
 } from "lucide-react"
-import { WHATSAPP_NUMBER } from "@/lib/constants"
+import { CONTACT, WHATSAPP_URL } from "@/lib/constants"
 
 async function getProfile(userId: string) {
   const supabase = await createClient()
@@ -24,13 +24,13 @@ async function getProfile(userId: string) {
   return data
 }
 
-async function getTutorialProgress(userId: string) {
+async function getCourseProgress(userId: string) {
   const supabase = await createClient()
   const { data } = await supabase
-    .from("tutorial_progress")
-    .select("*, tutorials(*)")
+    .from("course_progress")
+    .select("*, courses(*)")
     .eq("user_id", userId)
-    .order("last_watched_at", { ascending: false })
+    .order("completed_at", { ascending: false })
     .limit(5)
   return data || []
 }
@@ -44,7 +44,7 @@ export default async function DashboardPage() {
   }
 
   const profile = await getProfile(user.id)
-  const recentProgress = await getTutorialProgress(user.id)
+  const recentProgress = await getCourseProgress(user.id)
 
   const subscriptionLabel = {
     free: "Free",
@@ -152,7 +152,7 @@ export default async function DashboardPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-medium text-foreground truncate">
-                          {progress.tutorials?.title || "Tutorial"}
+                          {progress.courses?.title || "Course"}
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           <div className="flex-1 h-2 bg-border rounded-full overflow-hidden">
@@ -233,7 +233,7 @@ export default async function DashboardPage() {
                 Our team is here to support your learning journey
               </p>
               <Button asChild variant="outline" className="w-full">
-                <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I need help with my AI Academy account`} target="_blank" rel="noopener noreferrer">
+                <a href={WHATSAPP_URL('Hi, I need help with my AI Academy account')} target="_blank" rel="noopener noreferrer">
                   Chat on WhatsApp
                 </a>
               </Button>

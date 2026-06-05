@@ -1,15 +1,91 @@
-import { Metadata } from 'next'
+'use client'
+
+export const dynamic = 'force-dynamic'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { AIGenomeRadar } from '@/components/ai-genome-radar'
 import { WHATSAPP_URL, CERTIFICATION_LEVELS } from '@/lib/constants'
-import { ChevronRight, Download, Share2 } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'Your AI Genome Results | TwB',
-  description: 'Your personalized AI Genome profile and certification pathway.',
-}
+import { ChevronRight, Download, Share2, Lock } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function AssessmentResultsPage() {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        setUser(user)
+      } catch (error) {
+        console.log('Auth check failed', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    checkAuth()
+  }, [])
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-full border-4 border-gold/30 border-t-gold animate-spin mx-auto mb-4" />
+          <p className="text-foreground/60">Loading your results...</p>
+        </div>
+      </main>
+    )
+  }
+
+  if (!user) {
+    return (
+      <main className="min-h-screen bg-background flex items-center justify-center px-4">
+        <div className="max-w-md w-full">
+          <div className="bg-card border border-border rounded-2xl p-12 text-center">
+            <div className="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-8 h-8 text-gold" />
+            </div>
+            
+            <h1 className="text-3xl font-bold text-foreground mb-4">Your AI Genome Profile</h1>
+            
+            <p className="text-foreground/70 mb-8">
+              Sign in to access your personalized assessment results, certification pathway, and detailed recommendations.
+            </p>
+
+            <div className="bg-background/50 border border-border rounded-xl p-6 mb-8 text-left">
+              <h3 className="font-semibold text-foreground mb-4">What You Can Access:</h3>
+              <ul className="space-y-2 text-sm text-foreground/70">
+                <li>✓ AI Genome radar visualization</li>
+                <li>✓ Personalized recommendations</li>
+                <li>✓ Certification pathway</li>
+                <li>✓ Download & print results</li>
+                <li>✓ Industry benchmarking</li>
+                <li>✓ Progress tracking</li>
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Link
+                href="/auth/sign-up"
+                className="w-full px-4 py-3 bg-gold text-background rounded-lg font-semibold text-center hover:bg-gold/90 transition-all"
+              >
+                Create Account
+              </Link>
+              <Link
+                href="/auth/login"
+                className="w-full px-4 py-3 border-2 border-gold text-gold rounded-lg font-semibold text-center hover:bg-gold/10 transition-all"
+              >
+                Sign In
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    )
+  }
   // Sample genome data - in real app would come from assessment responses
   const genomeScores = [
     { dimension: 'Capability', score: 72, category: 'Infrastructure' },
@@ -198,21 +274,22 @@ export default function AssessmentResultsPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.print()}
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
+              >
+                <Download className="w-5 h-5" />
+                Print & Save
+              </button>
               <a
                 href={WHATSAPP_URL('Hi TwB! I have my assessment results and want to discuss next steps.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
               >
                 Talk to Expert
                 <ChevronRight className="w-5 h-5" />
               </a>
-              <Link
-                href="/playbooks"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
-              >
-                View Playbooks
-              </Link>
             </div>
           </div>
         </div>

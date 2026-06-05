@@ -104,17 +104,18 @@ export default function FreeAssessmentPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/assessments/professional"
+                href="/assessment-results"
                 className="px-8 py-3 bg-gold text-background rounded-lg font-semibold hover:bg-gold/90 transition-all flex items-center justify-center gap-2"
               >
-                Upgrade to Professional
+                View Full Profile
                 <ChevronRight className="w-5 h-5" />
               </Link>
               <Link
-                href="/"
-                className="px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all"
+                href="/assessments/professional"
+                className="px-8 py-3 border-2 border-gold text-gold rounded-lg font-semibold hover:bg-gold/10 transition-all flex items-center justify-center gap-2"
               >
-                Back to Home
+                Upgrade to Professional
+                <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
           </div>
